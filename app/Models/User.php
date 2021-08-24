@@ -33,6 +33,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -45,5 +46,22 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+
+    public function hasRoles(array $roles)
+    {
+        foreach ($roles as $role)
+        {
+            foreach ($this->roles as $userRole)
+            {
+                if($userRole->nombre === $role)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
