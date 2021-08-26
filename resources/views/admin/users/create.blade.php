@@ -7,7 +7,7 @@
 
 @section('header')
     <div class="col-sm-6">
-        <h1 class="m-0 ">Editar Usuario</h1>
+        <h1 class="m-0 ">Agregar Usuario</h1>
     </div><!-- /.col -->
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -33,6 +33,7 @@
                 <form action="{{ route('users.store') }}" method="POST">
                     @csrf
                     <div class="card-body">
+
                         <div class="form-group">
                             <label for="name">
                                 Nombre:
@@ -53,6 +54,7 @@
                                 </span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="email">
                                 Email:
@@ -71,6 +73,7 @@
                                 </span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="password">
                                 Contraseña:
@@ -90,6 +93,7 @@
                                 </span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="password_confirmation">
                                 Confirmar contraseña:
@@ -109,6 +113,24 @@
                                 </span>
                             @enderror
                         </div>
+
+
+                        @foreach ($roles as $role)
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="roles[]"
+                                    value="{{ $role->id }}"
+                                >
+                                <label
+                                    class="form-check-label"
+                                    for="roles[]"
+                                >
+                                {{ $role->name }}
+                                </label>
+                            </div>
+                        @endforeach
 
 
                         {{-- <div class="form-check">

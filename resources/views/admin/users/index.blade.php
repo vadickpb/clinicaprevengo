@@ -48,21 +48,35 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        @foreach ($user->roles as $role)
-                                            {{ $role->nombre }}
-                                        @endforeach
+
+                                            {{ $user->getRoleNames()->implode(' - ') }}
+
                                     </td>
                                     <td>
                                         <div class="row">
 
-                                            <a class="mr-2 btn btn-primary btn-sm" href="{{ route('users.edit', ['user' => $user->id]) }}" title="Editar"><i class="fas fa-pen">
-                                                </i>
+                                            <a
+                                                class="mr-2 btn btn-primary btn-sm"
+                                                href="{{ route('users.edit', ['user' => $user->id]) }}"
+                                                title="Editar"
+                                            >
+                                                <i class="fas fa-pen"></i>
                                             </a>
 
-                                            <form class="form-eliminar" action="{{ route('users.delete', ['user' => $user->id]) }}" method="post">
+                                            <form
+                                                class="form-eliminar"
+                                                action="{{ route('users.destroy', ['user' => $user->id]) }}"
+                                                method="post"
+                                            >
                                             @csrf
                                             @method('DELETE')
-                                                <button class="btn btn-danger btn-sm" type="submit" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                                <button
+                                                    class="btn btn-danger btn-sm"
+                                                    type="submit"
+                                                    title="Eliminar"
+                                                    >
+                                                        <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </div>
                                     </td>

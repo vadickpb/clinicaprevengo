@@ -69,12 +69,22 @@
                         @enderror
                     </div>
 
+                    @foreach ($roles as $role)
+                        <div class="form-check">
+                            <input
+                                class="form-check-input"
+                                name="roles[]"
+                                type="checkbox"
+                                value="{{ $role->id }}"
+                                {{ $user->roles->pluck('id')->contains($role->id) ? 'checked' : '' }}
+                                id="{{ $role->id }}"
+                            >
+                            <label for="{{ $role->id }}" class="form-check-label">
+                                {{ $role->name }}
+                            </label>
+                        </div>
+                    @endforeach
 
-
-                    {{-- <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> --}}
                 </div>
                 <!-- /.card-body -->
 

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Paciente::factory(18)->create();
 
         $this->call([
-            RoleSeeder::class
+            RolesSeeder::class, UserSeeder::class
         ]);
     }
 }

@@ -61,7 +61,7 @@
                 </li>
 
 
-                @if (auth()->user()->hasRoles(['admin']))
+
                     <li class="nav-item {{ openMenu(['admin/users', 'admin/users/create']) }}">
                         <a href="#" class="nav-link {{ activeMenu(['admin/users', 'admin/users/create']) }}">
                             <i class="nav-icon fas fa-users"></i>
@@ -72,22 +72,24 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('users.index') }}"
-                                    class="nav-link {{ activeMenu(['admin/users']) }}">
+                                <a href="{{ route('users.index') }}" class="nav-link {{ activeMenu(['admin/users']) }}">
                                     <i class="far fa-eye nav-icon"></i>
                                     <p>Mostrar usuarios</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users.create') }}"
-                                    class="nav-link {{ activeMenu(['admin/users/create']) }}">
-                                    <i class="fas fa-pen nav-icon"></i>
-                                    <p>Agregar nuevo usuario</p>
-                                </a>
-                            </li>
+                            @can('users.create')
+                                <li class="nav-item">
+                                    <a href="{{ route('users.create') }}"
+                                        class="nav-link {{ activeMenu(['admin/users/create']) }}">
+                                        <i class="fas fa-pen nav-icon"></i>
+                                        <p>Agregar nuevo usuario</p>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
-                @endif
+
+
 
 
                 <li class="nav-item {{ openMenu(['admin/pacientes', 'admin/pacientes/create']) }}">
@@ -117,6 +119,15 @@
                 </li>
 
 
+
+                <li class="nav-item">
+                    <a href="{{ route('roles.index') }}" class="nav-link {{ activeMenu(['admin/roles', 'admin/roles/create', 'admin/roles/*/edit']) }} ">
+                        <i class="nav-icon fas fa-user-tag"></i>
+                        <p>
+                            Roles
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('admin.index') }}" class="nav-link">

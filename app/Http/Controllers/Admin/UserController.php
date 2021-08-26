@@ -6,12 +6,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware(['roles:admin,medico']);
+        $this->middleware(['can:users.index'])->only('index');
+        $this->middleware(['can:users.create'])->only('create.store');
+        $this->middleware(['can:users.edit'])->only('edit.update');
+        $this->middleware(['can:users.destroy'])->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -21,8 +26,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $roles = Role::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'roles'));
     }
 
     /**
@@ -33,7 +39,8 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('admin.users.create');
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
 
     }
 
@@ -45,6 +52,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         //validar formulario
         $data = request()->validate([
             'name' => 'required',
@@ -53,11 +61,13 @@ class UserController extends Controller
         ]);
 
         //guardar los datos en la base de datos
-        User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password'])
         ]);
+
+        $user->syncRoles($request->roles);
 
         return redirect()->route('users.index')->with('message', 'agregado');
     }
@@ -79,12 +89,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
-        $user = User::find($id);
+        $roles = Role::all();
 
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -96,8 +106,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->all());
         //validar los datos
+
+
         $data = request()->validate([
             'name' => 'required',
             'email' => 'required'
@@ -109,6 +120,9 @@ class UserController extends Controller
             'name' => $data['name'],
             'email' => $data['email']
         ]);
+
+        $user->syncRoles($request->roles);
+
 
         // $user->name = $data['name'];
         // $user->email = $data['email'];
