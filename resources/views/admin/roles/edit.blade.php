@@ -24,9 +24,11 @@
                 action="{{ route('roles.update', ['role' => $role->id]) }}"
                 method="POST"
                 >
+                @csrf
+                @method('PUT')
+
                     <div class="card-body">
-                        @csrf
-                        @method('PUT')
+
 
                         <div class="form-group">
                             <label for="name">
@@ -78,7 +80,9 @@
                     </div>
 
                     <div class="card-footer">
-                        <input class="btn btn-primary float-right" type="submit" value="Editar">
+                        <input class="btn btn-primary" type="submit" value="Editar">
+
+                        <a href="{{ route('roles.index') }}" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
             </div>

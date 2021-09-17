@@ -76,7 +76,14 @@
                     </div>
 
                     <div class="card-footer">
-                        <input class="btn btn-primary float-right" type="submit" value="Agregar">
+                        <input class="btn btn-primary " type="submit" value="Agregar">
+
+                        <a
+                            class="btn btn-danger "
+                            href="{{ route('roles.index') }}"
+                        >
+                            Cancelar
+                        </a>
                     </div>
                 </form>
             </div>

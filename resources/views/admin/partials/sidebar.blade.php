@@ -61,6 +61,16 @@
                 </li>
 
 
+                <li class="nav-item {{ openMenu(['admin/citas']) }}">
+                    <a href="{{ route('citas.index') }}" class="nav-link {{ activeMenu(['admin/citas']) }}">
+                        <i class="nav-icon fas fa-calendar-week"></i>
+                        <p>
+                            Agenda de Citas
+                        </p>
+                    </a>
+                </li>
+
+
 
                     <li class="nav-item {{ openMenu(['admin/users', 'admin/users/create']) }}">
                         <a href="#" class="nav-link {{ activeMenu(['admin/users', 'admin/users/create']) }}">
@@ -88,6 +98,8 @@
                             @endcan
                         </ul>
                     </li>
+
+
 
 
 

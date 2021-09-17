@@ -11,8 +11,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Clínica Prevengo</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <!--css de public -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 
@@ -23,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" id="app">
 
         @include('admin.partials.nav')
 
@@ -80,6 +82,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
 
+
+    <!--JS de public-->
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
