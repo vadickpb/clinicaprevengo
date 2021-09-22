@@ -39,8 +39,18 @@ class CitaController extends Controller
     public function store(Request $request)
     {
         //
-        request()->validate(Cita::$rules);
-        $cita = Cita::create($request->all());
+        $data = request()->validate([
+            'title' => 'required',
+            'descripcion' => 'required',
+            'start' => 'required',
+            'end' => 'required'
+        ]);
+        $cita = Cita::create([
+            'title' => $data['title'],
+            'descripcion' => $data['descripcion'],
+            'start' => Carbon::parse($data['start'])->format('Y-m-d H:i:s'),
+            'end' => Carbon::parse($data['end'])->format('Y-m-d H:i:s')
+        ]);
     }
 
     /**
@@ -83,8 +93,18 @@ class CitaController extends Controller
     public function update(Request $request, Cita $cita)
     {
         //
-        request()->validate(Cita::$rules);
-        $cita->update($request->all());
+        $data = request()->validate([
+            'title' => 'required',
+            'descripcion' => 'required',
+            'start' => 'required',
+            'end' => 'required'
+        ]);
+        $cita->update([
+            'title' => $data['title'],
+            'descricion' => $data['descripcion'],
+            'start' => Carbon::parse($data['start'])->format('Y-m-d H:i:s'),
+            'end' => Carbon::parse($data['end'])->format('Y-m-d H:i:s')
+        ]);
 
         return response()->json($cita);
     }

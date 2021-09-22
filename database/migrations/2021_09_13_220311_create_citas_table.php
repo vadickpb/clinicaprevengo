@@ -17,7 +17,8 @@ class CreateCitasTable extends Migration
             $table->id();
             $table->string('title', 250);
             $table->text('descripcion');
-            $table->dateTime('date');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->timestamps();
         });
     }

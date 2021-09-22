@@ -12,10 +12,11 @@ class Cita extends Model
     static $rules = [
         'title' => 'required',
         'descripcion' => 'required',
-        'date' => 'required'
+        'start' => 'required',
+        'end' => 'required'
     ];
 
     protected $fillable = [
-        'title', 'descripcion', 'date'
+        'title', 'descripcion', 'start', 'end'
     ];
 }
